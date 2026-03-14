@@ -1,0 +1,57 @@
+#include <stdio.h>
+#include <math.h>
+#define Max_size 100
+
+int main() {
+    int n, m;
+    double a[Max_size][Max_size];
+    int znak = 1; // храним знак определителя отдельно
+    double det = 1.0;
+    scanf("%d %d", &n, &m);
+    if (n != m) {
+        printf("Error: the matrix is not quadratic");
+        return 0;
+    }
+    // Ввод матрицы
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            scanf("%lf", &a[i][j]);
+        }
+    }
+    // Шаг 1: Приведение к ступенчатому виду
+    for (int i = 0; i < n; i++) {
+        int max_str = i;
+        for (int j = i + 1; j < n; j++) {
+            if (fabs(a[j][i]) > fabs(a[max_str][i])) {
+                max_str = j;
+            }
+        }
+        if (max_str != i) {
+            for (int k = 0; k < n; k++) {
+                double temp = a[i][k];
+                a[i][k] = a[max_str][k];
+                a[max_str][k] = temp;
+            }
+            znak = znak * (-1);
+        }
+        // Зануляем элементы под главной диагональю
+        if (a[i][i] != 0) {
+            for (int j = i + 1; j < n; j++) {
+                double koef = a[j][i] / a[i][i];
+                for (int k = i; k < n; k++) {
+                    a[j][k] = a[j][k] - a[i][k] * koef;
+                }
+            }
+        }
+    }
+    // Шаг 2: Вычисление определителя
+    for (int i = 0; i < n; i++) {
+        det = det * a[i][i];
+    }
+    det = det * znak; // учитываем перестановки строк
+    if (fabs(det) < 0.000001) {
+        det = 0.0;
+    }
+    printf("%lf", det);
+    return 0;
+}
