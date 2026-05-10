@@ -1,0 +1,3 @@
+D:/CLion 2025.1.3/CLionProjects/tanker_counter/cmake-build-debug/CMakeFiles/tanker_counter.dir
+D:/CLion 2025.1.3/CLionProjects/tanker_counter/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/CLion 2025.1.3/CLionProjects/tanker_counter/cmake-build-debug/CMakeFiles/rebuild_cache.dir
